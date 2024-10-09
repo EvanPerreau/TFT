@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tft
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: pass4dev
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PHP_UPLOAD_MAX_FILESIZE: 64M
+      PHP_MAX_INPUT_VARS: 1000
+      PMA_ABSOLUTE_URI: http://localhost:8080/
+    ports:
+        - "8080:80"
+    depends_on:
+        - mysql
