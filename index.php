@@ -6,6 +6,8 @@ $loader = new \Helpers\Psr4AutoloaderClass;
 $loader->register();
 $loader->addNamespace('\Helpers', '/Helpers');
 $loader->addNamespace('\League\Plates\\', '/Vendor/Plates/src');
+$loader->addNamespace('\Controllers', '/Controllers');
 
-$engine = new \League\Plates\Engine('Views');
-echo $engine->render('home', ['tftSetName' => 'Set 3']);
+$controller = new \Controllers\MainController();
+
+$controller->index();
