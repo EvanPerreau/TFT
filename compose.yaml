@@ -1,9 +1,8 @@
-version: "3"
+version: '3.8'
 
 services:
-  mysql:
-    image: mysql:5.7
-    container_name: mysql
+  database:
+    image: mysql:9.0.1
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -13,19 +12,14 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql:/var/lib/mysql
-
+      - ./database:/var/lib/mysql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
     restart: always
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: database
       PMA_PORT: 3306
-      PHP_UPLOAD_MAX_FILESIZE: 64M
-      PHP_MAX_INPUT_VARS: 1000
-      PMA_ABSOLUTE_URI: http://localhost:8080/
     ports:
-        - "8080:80"
+      - "8080:80"
     depends_on:
-        - mysql
+      - database
