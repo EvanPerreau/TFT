@@ -8,7 +8,7 @@ class Config {
     /**
      * @var array|null Stores the configuration parameters.
      */
-    private static ?array $param;
+    private static ?array $param = null;
 
     /**
      * Retrieves a configuration parameter by name.
