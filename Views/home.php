@@ -1,4 +1,9 @@
 <?php
-$this->layout('template', ['title' => 'TP TFT']);
+$this->layout('template', ['title' => 'TP TFT - Home']);
 ?>
-<h1>TFT - Set <?= $this->e($tftSetName) ?></h1>
+<?php foreach ($listUnits as $unit) {
+    $this->insert('Partials/unit-card', [
+        'unit' => $unit
+    ]);
+} ?>
+<?= $this->insert('Partials/notification', ['message' => $message]) ?>
