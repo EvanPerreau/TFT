@@ -1,8 +1,6 @@
 <?php
 
 namespace Models;
-
-use Config\Config;
 use PDO;
 use PDOStatement;
 
@@ -11,7 +9,7 @@ abstract class BasePDODAO
     /**
      * @var PDO|null The PDO instance for database connection.
      */
-    private ?PDO $db;
+    private ?PDO $db = null;
 
     /**
      * Executes a SQL query with optional parameters.
@@ -35,9 +33,9 @@ abstract class BasePDODAO
     private function getDb(): PDO
     {
         if ($this->db == null) {
-            $dsn = Config::get("dsn");
-            $user = Config::get("user");
-            $dbname = Config::get("pass");
+            $dsn = \Config\Config::get("dsn");
+            $user = \Config\Config::get("user");
+            $dbname = \Config\Config::get("pass");
             $this->db = new PDO($dsn, $user, $dbname);
         }
         return $this->db;
