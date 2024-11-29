@@ -20,7 +20,11 @@ class RouteDeleteUnit extends Route
      */
     function get(array $params = []): void
     {
-        $this->controller->displayUnitDelete();
+        if (!isset($params['id'])) {
+            header("Location: /?message=Unit not found");
+            exit();
+        }
+        $this->controller->unitDelete($params['id']);
     }
 
     /**

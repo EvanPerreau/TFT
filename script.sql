@@ -2,9 +2,19 @@ CREATE TABLE UNIT (
   id VARCHAR(255) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   cost INT NOT NULL,
-  origin VARCHAR(255) NOT NULL,
   url_img VARCHAR(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO UNIT (id, name, cost, origin, url_img) VALUES ('1', 'Swordman', 1, 'Barracks', 'https://vignette.wikia.nocookie.net/ageofempires/images/4/4b/SwordsmanDE.png/revision/latest/scale-to-width-down/340?cb=20200820183157');
-INSERT INTO UNIT (id, name, cost, origin, url_img) VALUES ('2', 'Archer', 2, 'Archery Range', 'https://vignette.wikia.nocookie.net/ageofempires/images/4/4b/SwordsmanDE.png/revision/latest/scale-to-width-down/340?cb=20200820183157');
+CREATE TABLE ORIGIN (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  url_img VARCHAR(255)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE UNIT_ORIGIN (
+  id_unit VARCHAR(255),
+  id_origin BIGINT,
+  PRIMARY KEY (id_unit, id_origin),
+  FOREIGN KEY (id_unit) REFERENCES UNIT(id) ON DELETE CASCADE,
+  FOREIGN KEY (id_origin) REFERENCES ORIGIN(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

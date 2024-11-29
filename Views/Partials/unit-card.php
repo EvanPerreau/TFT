@@ -16,30 +16,14 @@
                 </a>
             </div>
             <div class="flex flex-col m-2">
-                <div class="flex justify-start z-10 relative gap-1">
-                    <span class="material-symbols-outlined z-10 text-amber-400 relative !text-xl !font-bold">
-                    fullscreen_exit
-                </span>
-                    <p class="text-amber-400 text-xl font-bold">
-                        True damage
-                    </p>
-                </div>
-                <div class="flex justify-start z-10 relative gap-1">
-                <span class="material-symbols-outlined z-10 text-amber-400 relative !text-xl !font-bold">
-                    fullscreen_exit
-                </span>
-                    <p class="text-amber-400 text-xl font-bold">
-                        True damage
-                    </p>
-                </div>
-                <div class="flex justify-start z-10 relative gap-1">
-                <span class="material-symbols-outlined z-10 text-amber-400 relative !text-xl !font-bold">
-                    fullscreen_exit
-                </span>
-                    <p class="text-amber-400 text-xl font-bold">
-                        True damage
-                    </p>
-                </div>
+                <?php foreach ($unit->getOrigin() as $origin) : ?>
+                    <div class="flex justify-start z-10 relative gap-1">
+                        <img src="<?= $origin->getImage() ?>" class="w-6 h-6 rounded-full" alt=""/>
+                        <p class="text-amber-400 text-xl font-bold">
+                            <?= $origin->getName() ?>
+                        </p>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

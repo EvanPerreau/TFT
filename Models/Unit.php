@@ -4,6 +4,15 @@ namespace Models;
 
 class Unit
 {
+    public function getOrigin(): array
+    {
+        return $this->origin;
+    }
+
+    public function setOrigin(array $origin): void
+    {
+        $this->origin = $origin;
+    }
     /**
      * Retrieves the ID of the unit.
      *
@@ -68,27 +77,6 @@ class Unit
     }
 
     /**
-     * Retrieves the origin of the unit.
-     *
-     * @return string The origin of the unit.
-     */
-    public function getOrigin(): string
-    {
-        return $this->origin;
-    }
-
-    /**
-     * Sets the origin of the unit.
-     *
-     * @param string $origin The origin to set.
-     * @return void
-     */
-    public function setOrigin(string $origin): void
-    {
-        $this->origin = $origin;
-    }
-
-    /**
      * Retrieves the URL of the unit's image.
      *
      * @return string The URL of the unit's image.
@@ -125,14 +113,16 @@ class Unit
     private int $cost;
 
     /**
-     * @var string The origin of the unit.
-     */
-    private string $origin;
-
-    /**
      * @var string The URL of the unit's image.
      */
     private string $url_img;
+
+    /**
+     * Retrieves the origin of the unit.
+     *
+     * @return Origin[] The origin of the unit.
+     */
+    private array $origin;
 
     public function hydrate(array $data): void
     {

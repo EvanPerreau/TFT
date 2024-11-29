@@ -26,5 +26,15 @@ class RouteAddUnitOrigin extends Route
     /**
      * @inheritDoc
      */
-    function post(array $params = []): void {}
+    function post(array $params = []): void {
+        try {
+            $data = [
+                'name' => $this->getParam($params, 'name', false),
+                'image' => $this->getParam($params, 'image', false),
+            ];
+        } catch (\Exception $e) {
+            $this->controller->displayAddUnitOrigin($e->getMessage());
+        }
+        $this->controller->addUnitOrigin($data);
+    }
 }

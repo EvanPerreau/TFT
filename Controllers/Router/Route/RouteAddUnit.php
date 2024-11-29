@@ -4,6 +4,7 @@ namespace Controllers\Router\Route;
 
 use Controllers\Router\Route;
 use Controllers\UnitController;
+use Exception;
 
 class RouteAddUnit extends Route
 {
@@ -26,5 +27,20 @@ class RouteAddUnit extends Route
     /**
      * @inheritDoc
      */
-    function post(array $params = []): void {}
+    function post(array $params = []): void {
+        try {
+            $data = [
+                'name' => $this->getParam($params, 'name', false),
+                'image' => $this->getParam($params, 'image', false),
+                'cost' => $this->getParam($params, 'cost', false),
+                'origin' =>
+                    array_map(function($origin) {
+                        return ["id"=>intval($origin)];
+                    }, $this->getParam($params, "origin", false))
+            ];
+        } catch (Exception $e) {
+            $this->controller->displayAddUnit($e->getMessage());
+        }
+        $this->controller->addUnit($data);
+    }
 }

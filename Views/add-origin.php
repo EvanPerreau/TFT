@@ -2,7 +2,7 @@
 $this->layout('template', ['title' => 'TP TFT - Add Origine']);
 ?>
 <div class="w-full mt-12 flex justify-center">
-    <form action="" class="max-w-xl flex-col flex gap-2">
+    <form action="index.php?action=add-unit-origin" method="post" class="max-w-xl flex-col flex gap-2">
         <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name
             <div class="mt-2">
                 <input type="text" name="name" id="name" autocomplete="name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -19,4 +19,5 @@ $this->layout('template', ['title' => 'TP TFT - Add Origine']);
             </button>
         </div>
     </form>
+    <?= $this->insert('Partials/notification', ['message' => $message]) ?>
 </div>

@@ -26,5 +26,25 @@ class RouteEditUnit extends Route
     /**
      * @inheritDoc
      */
-    function post(array $params = []): void {}
+    function post(array $params = []): void {
+        try {
+            $data = [
+                'id' => $this->getParam($params, 'id', false),
+                'name' => $this->getParam($params, 'name', false),
+                'image' => $this->getParam($params, 'image', false),
+                'cost' => $this->getParam($params, 'cost', false),
+                'origin' =>
+                    array_map(function($origin) {
+                        return ["id"=>intval($origin)];
+                    }, $this->getParam($params, "origin", false))
+            ];
+        } catch (\Exception $e) {
+            if (isset($params['id'])) {
+                $this->controller->displayEditUnit($params['id']);
+            } else {
+                header("Location: /?message=". $e->getMessage());
+            }
+        }
+        $this->controller->editUnit($data);
+    }
 }

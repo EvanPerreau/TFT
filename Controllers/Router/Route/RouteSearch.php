@@ -28,6 +28,15 @@ class RouteSearch extends Route
      */
     function post(array $params = []): void
     {
-        // TODO: Implement post() method.
+        try {
+            $data = [
+                'search' => $this->getParam($params, 'search', false),
+                'property' => $this->getParam($params, 'property', false),
+            ];
+        } catch (\Exception $e) {
+            $this->controller->search($e->getMessage());
+        }
+
+        $this->controller->displaySearch($data);
     }
 }
